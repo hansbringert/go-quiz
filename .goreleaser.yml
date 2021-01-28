@@ -1,0 +1,49 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at http://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    - go mod download
+    # you may remove this if you don't need go generate
+    - go generate ./...
+
+env:
+  - CGO_ENABLED=0
+
+builds:
+  - main: ./cmd/main.go
+    id: go-quiz
+    binary: go-quiz
+    goos:
+      - linux
+      - windows
+      - darwin
+
+archives:
+  -
+    id: go-quiz
+    builds:
+      - go-quiz
+    format: zip
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    replacements:
+      amd64: 64-bit
+      386: 32-bit
+      darwin: macOS
+      linux: Tux
+
+brews:
+  -
+    name: go-quiz
+    homepage: "https://go-quiz"
+    description: "Quiz web server"
+    ids:
+      - go-quiz
+    tap:
+      owner: hansbringert
+      name: homebrew-core
+    folder: Formula
+    url_template: "https://github.com/hansbringert/go-quiz/releases/download/v{{ .Version }}/{{ .ArtifactName }}"
+
+release:
+  disable: false
