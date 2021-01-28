@@ -29,6 +29,13 @@ jobs:
           go-version: '1.15.6' # The Go version to download (if necessary) and use.
       - run: go version
 
+      - name: Install GoReleaser
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          install-only: true
+          - name: Show GoReleaser version
+            run: goreleaser -v
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo "hello"
