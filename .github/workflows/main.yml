@@ -33,4 +33,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           go get -u golang.org/x/lint/golint
+          env
           make release
