@@ -31,8 +31,7 @@ jobs:
         with:
             # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
           version: v1.33.0
-          golangci-lint run ./...
-
+          args: run ./...
       - uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
