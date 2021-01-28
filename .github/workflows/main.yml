@@ -30,11 +30,8 @@ jobs:
       - run: go version
 
       - name: Install GoReleaser
-        uses: goreleaser/goreleaser-action@v2
-        with:
-          install-only: true
-          - name: Show GoReleaser version
-            run: goreleaser -v
+      - uses: goreleaser/goreleaser-action@v2
+        run: goreleaser -v
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
