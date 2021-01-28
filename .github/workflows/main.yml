@@ -28,6 +28,10 @@ jobs:
         with:
           go-version: '1.15.6' # The Go version to download (if necessary) and use.
       - uses: goreleaser/goreleaser-action@v2
+      - uses: golangci/golangci-lint-action@v2
+          with:
+            # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+            version: v1.33.0
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -37,10 +41,4 @@ jobs:
       - name: Run a multi-line script
         run: |
           env
-
-          # binary will be $(go env GOPATH)/bin/golangci-lint
-          curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.33.0
-
-          golangci-lint --version
-
           make release
