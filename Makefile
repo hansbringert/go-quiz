@@ -16,9 +16,9 @@ generate:
 run:
 	@./dist/hello-world_darwin_amd64/hello-world
 
-snapshot: lint
+snapshot: lint generate
 	goreleaser --rm-dist --snapshot
 
 # release
-release: lint
+release: lint generate
 	goreleaser --rm-dist
